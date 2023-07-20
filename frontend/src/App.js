@@ -1,10 +1,11 @@
+import LogoImg from '../src/images/Diamond.png'
+import HomePage from './components/home/HomePage'
 import React, {useState, useEffect} from 'react'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import axios from 'axios'
 import ProductForm from './components/product/ProductForm';
 import Signin from './components/user/signin';
 import Signup from './components/user/Signup'
-
 
 
 export default function App() {
@@ -69,6 +70,22 @@ export default function App() {
   return (
     <div>
 
+      <div className="logo-nav">
+        <img className="logo-img" src={LogoImg} />
+        <h1 className="logo-title">The Vintage Auction</h1>
+        <div className="nav">
+          <ul id="nav-bar">
+            <li className="nav-li">Home</li>
+            <li className="nav-li">Shop</li>
+            <li className="nav-li">Profile</li>
+            <li className="nav-li">Login</li>
+            <li className="nav-li">Logout</li>
+          </ul>
+        </div>
+      </div>
+      <HomePage/>
+
+
     <Router>
       <nav>
           <div>
@@ -91,6 +108,7 @@ export default function App() {
 
       <h1>The Vintage Auction</h1>
       <ProductForm />
+
     </div>
   )
 }
