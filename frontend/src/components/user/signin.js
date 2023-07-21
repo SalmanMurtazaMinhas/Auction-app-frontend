@@ -5,16 +5,17 @@ export default function Signin(props) {
     console.log(props)
 
     const [newUser, setNewUser] = useState({});
-
+    
     const changeHandler = (e) => {
         const user = {...newUser};
         user[e.target.name] = e.target.value;
         console.log(user);
         setNewUser(user);
     }
-
+    
     const loginHandler = () => {
         props.login(newUser)
+        props.parentCallback(newUser.username);
     }
 
   return (
