@@ -70,7 +70,7 @@ export default function App() {
   return (
     <div>
 
-      <div className="logo-nav">
+      {/* <div className="logo-nav">
         <img className="logo-img" src={LogoImg} />
         <h1 className="logo-title">The Vintage Auction</h1>
         <div className="nav">
@@ -83,17 +83,25 @@ export default function App() {
           </ul>
         </div>
       </div>
-      <HomePage/>
+      <HomePage/> */}
 
 
     <Router>
-      <nav>
-          <div>
+      <div className="logo-nav">
+      <img className="logo-img" src={LogoImg} />
+        <h1 className="logo-title">The Vintage Auction</h1>
+        <nav className="nav">
+        <ul id="nav-bar">
+            <li className="nav-li">Home</li>
+            <li className="nav-li">Shop</li>
+            <li className="nav-li">Profile</li>
             <Link to="/signup">Signup</Link> &nbsp;
-            <Link to="/signin">Signin</Link> &nbsp;
-            <Link to="/logout" onClick={logoutHandler}>Logout</Link>
-          </div>
+            <Link to="/signin" className="nav-li">Signin</Link> &nbsp;
+            <Link to="/logout" onClick={logoutHandler} className="nav-li">Logout</Link>
+        </ul>
         </nav>
+      </div>
+      
       <Routes>
         <Route
           path="/signup"
@@ -105,6 +113,7 @@ export default function App() {
         />
       </Routes>
     </Router>
+      <HomePage/>
 
       <h1>The Vintage Auction</h1>
       <ProductForm />
