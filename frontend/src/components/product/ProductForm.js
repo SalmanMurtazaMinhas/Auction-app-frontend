@@ -23,10 +23,16 @@ export default function ProductForm() {
   const handleSubmit = async (event) => {
       event.preventDefault()
 
-      const response = await axios.post('api/items/create/', newProduct)
+      const response = await axios.post('api/items/create/', newProduct,
+      {
+        headers: {
+            "Authorization": "Token "+localStorage.getItem("token")
+        }
+    }
+      )
       console.log(response)
 
-      if (response.status === 201){
+      if (response.status === 200){
           setUserMessage('Your Product Has Been Added')
       } else {
           setUserMessage('Something Went Wrong')
@@ -69,10 +75,10 @@ export default function ProductForm() {
                     onChange={handleChange}
               />
             </div>
-            <div>
+            {/* <div>
                 <label>Image</label>
                 <input type="file" onChange={(event) => {uploadImage(event.target.files)}} name="image"/>
-            </div>
+            </div> */}
             <div>
                 <label>Starting bid</label>
                 <input
