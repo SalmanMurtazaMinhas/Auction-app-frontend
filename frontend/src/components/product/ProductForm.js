@@ -22,7 +22,6 @@ export default function ProductForm() {
 
   const handleSubmit = async (event) => {
       event.preventDefault()
-
       const response = await axios.post('api/items/create/', newProduct,
       {
         headers: {
