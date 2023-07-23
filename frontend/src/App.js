@@ -6,12 +6,19 @@ import axios from 'axios'
 import ProductForm from './components/product/ProductForm';
 import Signin from './components/user/signin';
 import Signup from './components/user/Signup'
+
 import UploadWidget from './components/product/UploadWidget';
+
+import ProductDetail from './components/product/ProductDetail'
+
 
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(false); // user is logged in or not
   const [user, setUser] = useState({}); // Contain User, if any.
+  const [userName, setuserName] = useState();
+  
+  console.log(userName)
 
   useEffect(() => {
     let token = localStorage.getItem("token")
@@ -30,6 +37,11 @@ export default function App() {
    
   }, [])
 
+  const handleCallback = (childData) => {
+      // Update the name in the component's state
+      setuserName(childData)
+  }
+
   const registerHandler = (user) => {
     axios.post("auth/register/", user)
     .then(res => {
@@ -45,6 +57,7 @@ export default function App() {
     console.log('here is login handler')
     axios.post("auth/login/", cred)
       .then(res => {
+        console.log(res.data)
         console.log(res.data.key)
         let token = res.data.key
         if (token != null) {
@@ -92,14 +105,16 @@ export default function App() {
         <img className="logo-img" src={LogoImg} alt="A diamond"/>
         <h1 className="logo-title">The Vintage Auction</h1>
         <nav className="nav">
-          <ul id="nav-bar">
+
+        <ul id="nav-bar">
             <Link to="/" className="nav-li">Home</Link>
             <li className="nav-li">Shop</li>
-            <li className="nav-li">Profile</li>
+            <Link to="/productCreate" className="nav-li">Profile</Link>
             <Link to="/signup" className="nav-li">Signup</Link>
             <Link to="/signin" className="nav-li">Signin</Link>
-            <Link to="/logout" className="nav-li"onClick={logoutHandler}>Logout</Link>
-          </ul>
+            <Link to="/logout" onClick={logoutHandler} className="nav-li">Logout</Link>
+        </ul>
+
         </nav>
       </div>
       
@@ -114,7 +129,15 @@ export default function App() {
         />
         <Route
           path="/signin"
-          element={<Signin login = {loginHandler}/>}
+          element={<Signin login = {loginHandler} parentCallback={handleCallback}/>}
+        />
+        <Route
+          path="/productCreate"
+          element={isAuth ? <ProductForm /> : <Signin login = {loginHandler}/>}
+        />
+        <Route
+          path="/productDetail"
+          element={<ProductDetail itemId={1}/>}
         />
         {/* <Route 
           path="/product-form"
@@ -126,6 +149,10 @@ export default function App() {
         />
       </Routes>
     </Router>
+      {/* <HomePage/> */}
+
+      {/* <h1>The Vintage Auction</h1>
+      <ProductForm /> */}
     </div>
   )
 }
