@@ -40,6 +40,13 @@ body {
 .nav-li {
   font-size: 20px;
   list-style-type: none;
+  color: #222222;
+  text-decoration: none;
+}
+
+.nav-li:hover {
+  color: #22A39F;
+  cursor: pointer;
 }
 
 .main-homepage {
@@ -51,8 +58,81 @@ body {
 
 .homepage-div1,
 .homepage-div2 {
-  border: 1px solid #222222;
-  width: 250px;
-  height: 600px;
+  border: 1.5px solid #222222;
+  width: 290px;
+  min-height: 600px;
+  display: inline-block;
+}
+
+
+.typed {
+  /* border: 1px solid #222222; */
+  padding: 20px;
+  font-size: 25px;
+  text-align: justify;
+}
+
+/* -----------------------------signup/signin--------------------------------- */
+.signupdiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sub-signupdiv {
+  /* border: 3px solid #222222; */
+  /* background-color: #FFF; */
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  width: 550px;
+  margin: 20px;
+  padding: 20px;
+}
+
+.signup-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-label {
+  display: block;
+  font-size: 20px;
+}
+
+.signup-input {
+  width: 539px;
+  height: 35px;
+  border-radius: 0%;
+  margin-bottom: 15px;
+  outline: none;
+  padding-inline-start: 5px;
+  font-size: 15px;
+}
+
+.signup-key {
+  margin: 0 auto;
+  width: 50px;
+}
+
+.signup-title {
+  text-align: center;
+}
+
+.signup-button {
+  width: 100%px;
+  height: 40px;
+  background-color: #222222;
+  color:#FCFCF9;
+  font-family: 'IM Fell DW Pica SC', serif;
+  font-size: 20px;
+}
+
+.signup-button:hover {
+  background-color: #22A39F;
+  cursor: pointer;
+}
+
+.link-to-signup {
+  font-size: 20px;
+  text-align: center;
 }
 
