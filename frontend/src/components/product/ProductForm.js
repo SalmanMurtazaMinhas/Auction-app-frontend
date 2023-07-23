@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+
 
 export default function ProductForm() {
 
@@ -47,7 +49,7 @@ export default function ProductForm() {
 
   return (
     <div>
-
+        <Link to="/productIndex" className="nav-li">products</Link>
         <h2>Register your product here.</h2>
 
         <form onSubmit={handleSubmit}>

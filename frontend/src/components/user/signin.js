@@ -15,7 +15,7 @@ export default function Signin(props) {
     
     const loginHandler = () => {
         props.login(newUser)
-        props.parentCallback(newUser.username);
+        props.parentCallBack(newUser.username);
     }
 
   return (
