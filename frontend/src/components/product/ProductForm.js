@@ -24,12 +24,15 @@ export default function ProductForm() {
       const value = event.target.value
       console.log(attribute, value)
 
-      const currentNewProduct = {...newProduct}
+      const currentNewProduct = {...newProduct, image_url: imageUrl }
       
       currentNewProduct[attribute] = value
       
       setNewProduct(currentNewProduct)
       console.log(newProduct)
+      
+      
+
   }
 
   const handleSubmit = async (event) => {
