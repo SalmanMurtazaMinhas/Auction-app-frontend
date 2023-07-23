@@ -6,6 +6,7 @@ import axios from 'axios'
 import ProductForm from './components/product/ProductForm';
 import Signin from './components/user/signin';
 import Signup from './components/user/Signup'
+import ProductDetail from './components/product/ProductDetail'
 
 
 export default function App() {
@@ -127,6 +128,10 @@ export default function App() {
         <Route
           path="/productCreate"
           element={isAuth ? <ProductForm /> : <Signin login = {loginHandler}/>}
+        />
+        <Route
+          path="/productDetail"
+          element={<ProductDetail itemId={1}/>}
         />
       </Routes>
     </Router>
