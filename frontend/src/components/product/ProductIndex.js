@@ -28,6 +28,7 @@ export default function ProductIndex() {
                 <h4>{product.condition}</h4>
                 <p>{product.description}</p>
                 <h4>{product.starting_bid}BD</h4>
+                <img src={product.image_url}></img>
             </div>
         )
     })
