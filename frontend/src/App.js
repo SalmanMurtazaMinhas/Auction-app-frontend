@@ -6,7 +6,11 @@ import axios from 'axios'
 import ProductForm from './components/product/ProductForm';
 import Signin from './components/user/signin';
 import Signup from './components/user/Signup'
+
+import UploadWidget from './components/product/UploadWidget';
+
 import ProductDetail from './components/product/ProductDetail'
+
 
 
 export default function App() {
@@ -98,25 +102,27 @@ export default function App() {
 
     <Router>
       <div className="logo-nav">
-      <img className="logo-img" src={LogoImg} />
+        <img className="logo-img" src={LogoImg} alt="A diamond"/>
         <h1 className="logo-title">The Vintage Auction</h1>
         <nav className="nav">
+
         <ul id="nav-bar">
             <Link to="/" className="nav-li">Home</Link>
             <li className="nav-li">Shop</li>
             <Link to="/productCreate" className="nav-li">Profile</Link>
-            <Link to="/signup" className="nav-li">Signup</Link> &nbsp;
-            <Link to="/signin" className="nav-li">Signin</Link> &nbsp;
+            <Link to="/signup" className="nav-li">Signup</Link>
+            <Link to="/signin" className="nav-li">Signin</Link>
             <Link to="/logout" onClick={logoutHandler} className="nav-li">Logout</Link>
         </ul>
+
         </nav>
       </div>
       
       <Routes>
         <Route
           path="/"
-          element={<HomePage/>}
-        />
+          element={<HomePage />}
+          />
         <Route
           path="/signup"
           element={<Signup register={registerHandler} />}
@@ -133,13 +139,20 @@ export default function App() {
           path="/productDetail"
           element={<ProductDetail itemId={1}/>}
         />
+        {/* <Route 
+          path="/product-form"
+          element={<ProductForm />}
+        /> */}
+        <Route 
+          path="/upload"
+          element={<UploadWidget />}
+        />
       </Routes>
     </Router>
       {/* <HomePage/> */}
 
       {/* <h1>The Vintage Auction</h1>
       <ProductForm /> */}
-
     </div>
   )
 }
