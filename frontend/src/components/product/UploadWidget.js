@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
 
 export default class UploadWidget extends Component {
+    
     componentDidMount() {
+        
+        console.log(this.props)
         let myWidget = window.cloudinary.createUploadWidget(
         {
             cloudName: "auction-app",
-            uploadPreset: "rcqzwz5n"
+            uploadPreset: "rcqzwz5n",
         },
         (error, result) => {
             if (!error && result && result.event === "success") {
-                console.log("Yay! You just uploaded an image of your item.", result.info);
+                console.log("Yay! You just uploaded an image of your item.", result.info.url);
+                this.props.parentCallBack(result.info.url)
             }
         }
     );
@@ -20,7 +24,9 @@ export default class UploadWidget extends Component {
         },
         false
     )
+    
     }
+    
   render() {
     return (
       <div>

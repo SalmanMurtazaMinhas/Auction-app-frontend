@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-r
 export default function ProductDetail(props) {
     const [item, setItem] = useState({})
     const [loading, setLoading] = useState(true)
+    const [userMessage, setUserMessage] = useState('')
 
     
     useEffect(() => {
@@ -43,7 +44,7 @@ export default function ProductDetail(props) {
             setUserMessage('Your Bid has been placed')
             // navigate('/')
         }
-        else setNewJournal('Something Went Wrong')
+        // else setNewJournal('Something Went Wrong')
 
     }
 

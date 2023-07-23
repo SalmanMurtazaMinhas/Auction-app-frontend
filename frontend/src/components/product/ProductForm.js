@@ -1,13 +1,23 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import UploadWidget from './UploadWidget'
+
+
 
 
 export default function ProductForm() {
 
   const [newProduct, setNewProduct] = useState({})
   const [userMessage, setUserMessage] = useState('')
-  
+  const [imageUrl, setImageUrl] = useState();
+  console.log(imageUrl)
+
+  const handleCallBack = (childData) => {
+    console.log('okayy')
+    // Update the name in the component's state
+    setImageUrl(childData)
+    }
 
   const handleChange = (event) => {
       const attribute = event.target.name
@@ -33,6 +43,7 @@ export default function ProductForm() {
     }
       )
       console.log(response)
+      
 
       if (response.status === 200){
           setUserMessage('Your Product Has Been Added')
@@ -47,10 +58,13 @@ export default function ProductForm() {
     console.log(files[0])
    }
 
+   
   return (
     <div>
         <Link to="/productIndex" className="nav-li">products</Link>
         <h2>Register your product here.</h2>
+
+        <UploadWidget parentCallBack={handleCallBack}/>
 
         <form onSubmit={handleSubmit}>
             <div>
