@@ -16,6 +16,7 @@ export default function ProductForm() {
   const handleCallBack = (childData) => {
     console.log('okayy')
     // Update the name in the component's state
+    // setImageUrl(prev =>{return [...prev,childData]})
     setImageUrl(childData)
     }
 
