@@ -6,6 +6,8 @@ import Keys from '../../images/Keys.png';
 export default function Signin(props) {
     console.log(props)
 
+    
+
     const [newUser, setNewUser] = useState({});
     
     const changeHandler = (e) => {
