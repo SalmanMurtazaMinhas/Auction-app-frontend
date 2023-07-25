@@ -6,47 +6,73 @@ import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-r
 export default function ProductDetail(props) {
     const [item, setItem] = useState({})
     const [loading, setLoading] = useState(true)
+    const [userMessage, setUserMessage] = useState('')
+    const [newBid, setNewBid] = useState('')
+    const [lastBid, setLastBid] = useState('')
+
+    const item_id = props.itemId
+
 
     
     useEffect(() => {
         getProductDetail()
+        getLastBid()
     },[])
 
     const getProductDetail = async() => {
-        const response = await axios.get(`/api/items/detail/${props.itemId}`)
+        const response = await axios.get(`/api/items/detail/${props.itemId}/`)
 
         console.log(response.data)
 
         setItem(response.data)
+
         setLoading(false)
-
-
-
     }
 
+    const getLastBid = async() => {
+      const response = await axios.post(`/api/items/lastbid/`, {item_id: props.itemId})
+      console.log(response.data)
+
+      setLastBid(response.data)
+    }
+
+
+    const handleChange = (event) => {
+      const attribute = event.target.name
+      const value = event.target.value
+
+      setNewBid(value)
+      console.log(newBid)
+  }
 
     const handleBid = async (e) => {
-        console.log('bid placed')
+        // console.log('bid placed')
+        // console.log(localStorage.getItem("token"))
         e.preventDefault()
-
-
-        const response = await axios.post('/api/item/bid', item , 
+        // console.log(item.id)
+        const response = await axios.post('api/items/detail/bid/', {newBid: newBid, item: item},
         {
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }
+          headers: {
+              "Authorization": "Token "+localStorage.getItem("token")
+          }
+      }
         )
-        console.log(response)
+        console.log(response.data)
+      setNewBid(response.data.bid_amount)
+      getLastBid()
 
-        if (response.status === 201){
-            setUserMessage('Your Bid has been placed')
-            // navigate('/')
+  
+        if (response.status === 200){
+          if (response.data === "Bid amount is too low!"){
+            setUserMessage("Bid amount is too low!")
+          }
+          else{
+            setUserMessage('Your Bid Has Been Added')
+          }
+        } else {
+            setUserMessage('Something Went Wrong')
         }
-        else setNewJournal('Something Went Wrong')
-
-    }
-
+      }
 
 
   return (
@@ -55,11 +81,14 @@ export default function ProductDetail(props) {
         <h1>{item.name}</h1>
         <p>{item.description}</p>
         <p>${item.starting_bid}</p>
+        <p> Current bid: {lastBid}</p>
       </div>
-    <input type='text'> 
-    
-    </input>
-      <button onClick={handleBid}>Place Bid</button>
+        <form onSubmit={handleBid}>
+          <input onChange={handleChange} type="text" name="amount" placeholder="Enter amount" />
+          <input type="submit" value="Submit" />
+        </form>
+
+        {userMessage}
     </>
   )
 }

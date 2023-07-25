@@ -4,6 +4,8 @@ import {Container, Form, Button} from "react-bootstrap"
 export default function Signin(props) {
     console.log(props)
 
+    
+
     const [newUser, setNewUser] = useState({});
     
     const changeHandler = (e) => {
