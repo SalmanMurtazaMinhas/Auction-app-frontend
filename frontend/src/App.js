@@ -8,6 +8,7 @@ import ProductIndex from './components/product/ProductIndex'
 import Signin from './components/user/signin';
 import Signup from './components/user/Signup'
 import UserProfile from './components/user/UserProfile'
+import UserUpdate from './components/user/UserUpdate'
 
 import UploadWidget from './components/product/UploadWidget';
 
@@ -175,10 +176,10 @@ export default function App() {
             <Link to="/" className="nav-li">Home</Link>
             {/* <li className="nav-li">Shop</li> */}
             <Link to="/productIndex" className="nav-li">Shop</Link>
-            <Link to="/productCreate" className="nav-li">Profile</Link>
+            <Link to="/productCreate" className="nav-li">Add Item</Link>
             <Link to="/signup" className="nav-li">Signup</Link>
             <Link to="/signin" className="nav-li">Signin</Link>
-            <Link to="/UserProfile" className="nav-li">user</Link>
+            <Link to="/userProfile" className="nav-li">Profile</Link>
             <Link to="/logout" onClick={logoutHandler} className="nav-li">Logout</Link>
         </ul>
 
@@ -199,8 +200,12 @@ export default function App() {
           element={<Signin login = {loginHandler} parentCallBack={handleCallBack}/>}
         />
         <Route
-          path="/UserProfile"
-          element={isAuth ? <UserProfile idFunc = {getUserId} userId = {userId} detailsFunc = {getUserDetail} userDetails = {userDetails} /> : <Signin login = {loginHandler} parentCallBack={handleCallBack}/>}
+          path="/userProfile"
+          element={isAuth ? <UserProfile userDetails = {userDetails}/> : <Signin login = {loginHandler} parentCallBack={handleCallBack}/>}
+        />
+        <Route
+          path="/userUpdate"
+          element={<UserUpdate idFunc = {getUserId} userId = {userId} detailsFunc = {getUserDetail} userDetails = {userDetails}/>}
         />
         <Route
           path="/productCreate"
