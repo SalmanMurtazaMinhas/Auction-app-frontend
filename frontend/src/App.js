@@ -11,6 +11,7 @@ import Signup from './components/user/Signup'
 import UploadWidget from './components/product/UploadWidget';
 
 import ProductDetail from './components/product/ProductDetail'
+import MyProducts from './components/product/MyProducts'
 
 
 
@@ -142,8 +143,12 @@ export default function App() {
           element={isAuth ? <ProductIndex /> : <Signin login = {loginHandler} parentCallBack={handleCallBack}/>}
         />
         <Route
-          path="/productDetail"
-          element={<ProductDetail itemId={1}/>}
+          path="/myProducts"
+          element={isAuth ? <MyProducts /> : <Signin login = {loginHandler} parentCallBack={handleCallBack}/>}
+        />
+        <Route
+          path="/api/items/detail/:id/"
+          element={<ProductDetail />}
         />
         {/* <Route 
           path="/product-form"
