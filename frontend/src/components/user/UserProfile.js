@@ -6,11 +6,19 @@ import UserUpdate from './UserUpdate'
 
 export default function UserProfile(props) {
     console.log(props)
-
+    // const [userId, setUserId] = useState('')
     useEffect(() => {
         props.idFunc()
+        // setUserId(props.userId)
         // props.detailsFunc()
     }, [])
+    
+    // useEffect(() => {
+    //     if(!userId){
+    //         props.detailsFunc()
+    //     }
+    //     // props.detailsFunc()
+    // },[userId])
 
     const [formData, setFormData] = useState({});
 
@@ -27,7 +35,7 @@ export default function UserProfile(props) {
 
   return (
     <div>
-        <UserUpdate func = {updateHandler} data = {formData} setData = {setFormData} updateFunc = {updateHandler}/>
+        <UserUpdate func = {changeHandler} data = {formData} setData = {setFormData} updateFunc = {updateHandler}/>
     </div>
   )
 }
