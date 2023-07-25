@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
 
-export default function ProductIndex() {
+export default function MyProducts() {
 
-    const [products, setProducts] = useState([])
+    const [myProducts, setMyProducts] = useState([])
 
     useEffect(() => {
-        getAllProducts()
+        getMyProducts()
     }, [])
 
-    const getAllProducts = async () => {
-        const response = await axios.get('api/items/', 
+    const getMyProducts = async () => {
+        console.log('hi')
+        const response = await axios.get('api/items/personal', 
             {
                 headers: {
                     "Authorization": "Token "+localStorage.getItem("token")
@@ -19,19 +19,14 @@ export default function ProductIndex() {
             }
         )
         console.log(response)
-        setProducts(response.data)
+        setMyProducts(response.data)
     }
 
-    // const allImages =(urls)=>{
-    //     return urls.map((image_url, index) => {
-    //         <img key={index} src={image_url}></img>
-    //     })
-    // } 
-    const allProducts = products.map((product, index) => {
+
+    const allMyProducts = myProducts.map((product, index) => {
         return (
             <div key={index}>
                 <img className="product-image" src={product.image_url} alt="You're here!"/>
-                <Link to={`/api/items/detail/${product.id}/`} ><h2>{product.name}</h2></Link>
                 <h4>{product.condition}</h4>
                 <p>{product.description}</p>
                 <h4>{product.starting_bid}BD</h4>
@@ -47,7 +42,7 @@ export default function ProductIndex() {
 
     return (
         <>
-            {allProducts}
+            {allMyProducts}
         </>
 
     )

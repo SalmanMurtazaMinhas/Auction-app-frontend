@@ -10,10 +10,6 @@ export default function ProductDetail(props) {
     const [newBid, setNewBid] = useState('')
     const [lastBid, setLastBid] = useState('')
 
-    const item_id = props.itemId
-
-
-    
     useEffect(() => {
         getProductDetail()
         getLastBid()
@@ -50,7 +46,7 @@ export default function ProductDetail(props) {
         // console.log(localStorage.getItem("token"))
         e.preventDefault()
         // console.log(item.id)
-        const response = await axios.post('api/items/detail/bid/', {newBid: newBid, item: item},
+        const response = await axios.post('api/items/detail/<pk>/bid/', {newBid: newBid, item: item},
         {
           headers: {
               "Authorization": "Token "+localStorage.getItem("token")
@@ -73,9 +69,6 @@ export default function ProductDetail(props) {
             setUserMessage('Something Went Wrong')
         }
       }
-        // else setNewJournal('Something Went Wrong')
-
-
 
 
   return (
