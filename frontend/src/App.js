@@ -7,6 +7,7 @@ import ProductForm from './components/product/ProductForm';
 import ProductIndex from './components/product/ProductIndex'
 import Signin from './components/user/signin';
 import Signup from './components/user/Signup'
+import UserProfile from './components/user/UserProfile'
 
 import UploadWidget from './components/product/UploadWidget';
 
@@ -18,6 +19,8 @@ export default function App() {
   const [isAuth, setIsAuth] = useState(false); // user is logged in or not
   const [user, setUser] = useState({}); // Contain User, if any.
   const [userName, setuserName] = useState();
+  const [userId, setUserId] = useState([])
+  const [userDetails, setUserDetails] = useState([])
   
   console.log(userName)
 
@@ -37,6 +40,31 @@ export default function App() {
     }
    
   }, [])
+
+  const getUserDetail = async (formData) => {
+    const response = await axios.patch(`auth/user/update/${userId.pk}/`, formData, 
+        {
+            headers: {
+                "Authorization": "Token "+localStorage.getItem("token")
+            }
+        }
+    )
+    console.log(response)
+    setUserDetails(response.data)
+}
+
+  const getUserId = async () => {
+    const response = await axios.get('auth/user/details/', 
+        {
+            headers: {
+                "Authorization": "Token "+localStorage.getItem("token")
+            }
+        }
+    )
+    console.log(response)
+    setUserId(response.data)
+    // getUserDetail()
+}
 
   const handleCallBack = (childData) => {
       // Update the name in the component's state
@@ -114,6 +142,7 @@ export default function App() {
             <Link to="/productCreate" className="nav-li">Profile</Link>
             <Link to="/signup" className="nav-li">Signup</Link>
             <Link to="/signin" className="nav-li">Signin</Link>
+            <Link to="/UserProfile" className="nav-li">user</Link>
             <Link to="/logout" onClick={logoutHandler} className="nav-li">Logout</Link>
         </ul>
 
@@ -132,6 +161,10 @@ export default function App() {
         <Route
           path="/signin"
           element={<Signin login = {loginHandler} parentCallBack={handleCallBack}/>}
+        />
+        <Route
+          path="/UserProfile"
+          element={<UserProfile idFunc = {getUserId} userId = {userId} detailsFunc = {getUserDetail} userDetails = {userDetails} />}
         />
         <Route
           path="/productCreate"
