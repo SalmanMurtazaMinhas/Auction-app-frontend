@@ -1,6 +1,13 @@
 import React from 'react'
 
-export default function HomePage() {
+export default function HomePage(props) {
+  console.log(props)
+
+  if(props.loader){
+    props.userDetails()
+    props.setLoader(false)
+  }
+
   return (
     <div>
         <div className="main-homepage">

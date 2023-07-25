@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import {Container, Form, Button} from "react-bootstrap"
 import Keys from '../../images/Keys.png';
 
 export default function Signin(props) {
     console.log(props)
+    let navigate = useNavigate()
 
     
 
@@ -20,6 +21,7 @@ export default function Signin(props) {
     const loginHandler = () => {
         props.login(newUser)
         props.parentCallBack(newUser.username);
+        
     }
 
   return (

@@ -1,7 +1,7 @@
 import LogoImg from '../src/images/Diamond.png'
 import HomePage from './components/home/HomePage'
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import ProductForm from './components/product/ProductForm';
 import ProductIndex from './components/product/ProductIndex'
@@ -22,8 +22,10 @@ export default function App() {
   const [userName, setuserName] = useState();
   const [userId, setUserId] = useState([])
   const [userDetails, setUserDetails] = useState([])
+  const [loader, setLoader] = useState(false)
+  const navigate = useNavigate()
   
-  console.log(userName)
+  console.log(userDetails)
 
   useEffect(() => {
     let token = localStorage.getItem("token")
@@ -33,6 +35,7 @@ export default function App() {
         {
           setIsAuth(true)
           setUser(user)
+          
         }
         else if (!user){
           localStorage.remove("token")
@@ -64,6 +67,13 @@ export default function App() {
     )
     console.log(response)
     setUserId(response.data)
+    setLoader(true)
+    
+    console.log(loader)
+
+    // if(isAuth){
+    //   getUserDetail()
+    // }
     // getUserDetail()
 }
 
@@ -76,6 +86,11 @@ export default function App() {
     axios.post("auth/register/", user)
     .then(res => {
       console.log(res)
+
+      if(res.status === 204){
+        navigate('/signin')
+    }
+
     }).catch(err => {
       console.log(err)
     })
@@ -89,6 +104,11 @@ export default function App() {
       .then(res => {
         console.log(res.data)
         console.log(res.data.key)
+
+      //   if(res.status === 200){
+      //     navigate('/')
+      // }
+
         let token = res.data.key
         if (token != null) {
           localStorage.setItem("token", token)
@@ -96,8 +116,23 @@ export default function App() {
           let user = token
           setIsAuth(true)
           setUser(user)
+
+          if(user){
+            getUserId()
+            // setLoader(true)
+            navigate('/')
+          }
+
+          
         }
       })
+      // .finally(
+        
+      //   {if(loader){
+      //     getUserDetail()
+      //   }}
+      
+      // )
       .catch(err => {
         console.log("Error!!!",err)
       })
@@ -130,7 +165,7 @@ export default function App() {
       <HomePage/> */}
 
 
-    <Router>
+    
       <div className="logo-nav">
         <img className="logo-img" src={LogoImg} alt="A diamond"/>
         <h1 className="logo-title">The Vintage Auction</h1>
@@ -153,7 +188,7 @@ export default function App() {
       <Routes>
         <Route
           path="/"
-          element={<HomePage />}
+          element={<HomePage loader = {loader} setLoader = {setLoader} userDetails = {getUserDetail}/>}
           />
         <Route
           path="/signup"
@@ -165,7 +200,7 @@ export default function App() {
         />
         <Route
           path="/UserProfile"
-          element={<UserProfile idFunc = {getUserId} userId = {userId} detailsFunc = {getUserDetail} userDetails = {userDetails} />}
+          element={isAuth ? <UserProfile idFunc = {getUserId} userId = {userId} detailsFunc = {getUserDetail} userDetails = {userDetails} /> : <Signin login = {loginHandler} parentCallBack={handleCallBack}/>}
         />
         <Route
           path="/productCreate"
@@ -192,7 +227,7 @@ export default function App() {
           element={<UploadWidget />}
         />
       </Routes>
-    </Router>
+    
       {/* <HomePage/> */}
 
       {/* <h1>The Vintage Auction</h1>
