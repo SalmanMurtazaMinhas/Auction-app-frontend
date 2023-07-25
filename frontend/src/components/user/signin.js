@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {Container, Form, Button} from "react-bootstrap"
+import Keys from '../../images/Keys.png';
 
 export default function Signin(props) {
     console.log(props)
@@ -17,26 +19,30 @@ export default function Signin(props) {
     
     const loginHandler = () => {
         props.login(newUser)
-        props.parentCallback(newUser.username);
+        props.parentCallBack(newUser.username);
     }
 
   return (
-    <div>
-        <h1>Signin</h1>
-
-        <Container>
+    <div className='signupdiv'>
+        
+        <div className='sub-signupdiv'>
+        <Container className='signup-container'>
+            <img src={Keys} className="signup-key" />
+            <h1 className='signup-title'>LOGIN TO YOUR ACCOUNT</h1>
             <Form.Group>
-                <Form.Label>User Name</Form.Label>
-                <Form.Control name="username" onChange={changeHandler}></Form.Control>
+                <Form.Label className='signup-label'>Username</Form.Label>
+                <Form.Control className='signup-input' name="username" onChange={changeHandler}></Form.Control>
             </Form.Group>
 
             <Form.Group>
-                <Form.Label>Password</Form.Label>
-                <Form.Control name="password" type="password" onChange={changeHandler}></Form.Control>
+                <Form.Label className='signup-label'>Password</Form.Label>
+                <Form.Control className='signup-input' name="password" type="password" onChange={changeHandler}></Form.Control>
             </Form.Group>
 
-            <Button onClick={loginHandler} variant='primary'>Login</Button>
+            <Button onClick={loginHandler} variant='primary' className="signup-button">Login</Button>
+            <p className="link-to-signup">Don't have an account? <Link to="/signup">Signup here.</Link></p>
         </Container>
+        </div>
     </div>
   )
 }

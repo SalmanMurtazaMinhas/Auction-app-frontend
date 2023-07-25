@@ -73,6 +73,9 @@ export default function ProductDetail(props) {
             setUserMessage('Something Went Wrong')
         }
       }
+        // else setNewJournal('Something Went Wrong')
+
+
 
 
   return (
