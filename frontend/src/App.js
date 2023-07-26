@@ -220,7 +220,7 @@ export default function App() {
           element={isAuth ? <MyProducts /> : <Signin login = {loginHandler} parentCallBack={handleCallBack}/>}
         />
         <Route
-          path="/api/items/detail/:id/"
+          path="/api/items/detail/:itemId/"
           element={<ProductDetail />}
         />
         {/* <Route 

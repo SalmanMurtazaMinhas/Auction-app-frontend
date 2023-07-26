@@ -10,13 +10,16 @@ export default function ProductDetail(props) {
     const [newBid, setNewBid] = useState('')
     const [lastBid, setLastBid] = useState('')
 
+    const {itemId} = useParams()
+    console.log({itemId})
+
     useEffect(() => {
         getProductDetail()
         getLastBid()
     },[])
 
     const getProductDetail = async() => {
-        const response = await axios.get(`/api/items/detail/${props.itemId}/`)
+        const response = await axios.get(`/api/items/detail/${itemId}/`)
 
         console.log(response.data)
 
