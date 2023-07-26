@@ -77,6 +77,7 @@ export default function ProductDetail(props) {
   return (
     <>
          <div>
+          <img src={item.image_url}></img>
         <h1>{item.name}</h1>
         <p>{item.description}</p>
         <p>${item.starting_bid}</p>

@@ -1,4 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
+
 
 export default function HomePage(props) {
   console.log(props)
@@ -8,8 +12,44 @@ export default function HomePage(props) {
     props.setLoader(false)
   }
 
+  useEffect(() => {
+    getCategories()
+    // getCategoryFilter()
+}, [])
+
+  const [categories, setCategories] = useState([])
+ 
+  console.log(categories)
+
+  const getCategories = async (e) => {
+    const response = await axios.get('api/category/list/')
+    console.log(response.data)
+
+    setCategories(response.data)
+
+    return response 
+   }
+
+
+
+  // const buttonHandler = () => {
+  //   console.log('okayyyyy')
+  // }
+
+  const allCategories = categories.map((category, index) => {
+    return (
+      <div>
+        <ul>
+          {/* <button onClick={buttonHandler} value={category.id}></button> */}
+          <Link to={`/categoryIndex/${category.id}/`} className="nav-li" defaultValue={category.id} value={category.id}>{category.name} </Link>
+        </ul>
+      </div>
+    )
+  })
+
   return (
     <div>
+      
         <div className="main-homepage">
             <div className="homepage-div1">
               
@@ -21,7 +61,9 @@ export default function HomePage(props) {
                 And with our convenient online bidding system, you can participate in the auction from anywhere in the world. 
                 So what are you waiting for? Start browsing our auctions today and see what you can find!</p>
             </div>
-            <div className="homepage-div2"></div>
+            <div className="homepage-div2">
+            {allCategories}
+            </div>
         </div>
     </div>
   )
