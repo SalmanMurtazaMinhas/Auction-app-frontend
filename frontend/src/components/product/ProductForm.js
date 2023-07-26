@@ -69,7 +69,7 @@ export default function ProductForm() {
    
 
    const categoriesList = categories.map(function(category, index){
-    return <option key={index}>{category.id}</option>
+    return <option key={index} value={category.id}>{category.name}</option>
    })
 
   return (

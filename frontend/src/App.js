@@ -13,6 +13,7 @@ import UploadWidget from './components/product/UploadWidget';
 
 import ProductDetail from './components/product/ProductDetail'
 import MyProducts from './components/product/MyProducts'
+import CategoryIndex from './components/product/CategoryIndex'
 
 
 
@@ -181,7 +182,7 @@ export default function App() {
             <Link to="/productCreate" className="nav-li">Add Item</Link>
             <Link to="/signup" className="nav-li">Signup</Link>
             <Link to="/signin" className="nav-li">Signin</Link>
-            <Link to="/userProfile" className="nav-li">Profile</Link>
+            <Link to="/userProfile" className="nav-li">{userDetails.username}</Link>
             <Link to="/logout" onClick={logoutHandler} className="nav-li">Logout</Link>
         </ul>
 
@@ -232,6 +233,10 @@ export default function App() {
         <Route 
           path="/upload"
           element={<UploadWidget />}
+        />
+        <Route 
+          path="/categoryIndex/:cat/"
+          element={<CategoryIndex />}
         />
       </Routes>
     

@@ -98,7 +98,11 @@ export default function ProductDetail(props) {
   return (
     <>
          <div>
+
+          <img src={item.image_url}></img>
+
           Current balance: {balance}
+
         <h1>{item.name}</h1>
         <p>{item.description}</p>
         <p>{item.starting_bid}BHD</p>
