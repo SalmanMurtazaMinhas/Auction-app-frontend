@@ -9,7 +9,6 @@ import Signin from './components/user/signin';
 import Signup from './components/user/Signup'
 import UserProfile from './components/user/UserProfile'
 import UserUpdate from './components/user/UserUpdate'
-
 import UploadWidget from './components/product/UploadWidget';
 
 import ProductDetail from './components/product/ProductDetail'
@@ -44,7 +43,6 @@ export default function App() {
           setIsAuth(false)
         }
     }
-   
   }, [])
 
   const getUserDetail = async (formData) => {
@@ -55,8 +53,11 @@ export default function App() {
             }
         }
     )
-    console.log(response)
+    
     setUserDetails(response.data)
+    console.log(JSON.stringify(response.data))
+    localStorage.setItem("userDetails", JSON.stringify(response.data))
+
 }
 
   const getUserId = async () => {
@@ -143,6 +144,7 @@ export default function App() {
     const logoutHandler = (e) => {
     e.preventDefault();
     localStorage.removeItem("token");
+    localStorage.removeItem("userDetails");
     setIsAuth(false)
     setUser(null)
   }
@@ -214,7 +216,7 @@ export default function App() {
         />
         <Route
           path="/productIndex"
-          element={isAuth ? <ProductIndex /> : <Signin login = {loginHandler} parentCallBack={handleCallBack}/>}
+          element={isAuth ? <ProductIndex userDetails = {userDetails}/> : <Signin login = {loginHandler} parentCallBack={handleCallBack}  />}
         />
         <Route
           path="/myProducts"
@@ -222,7 +224,7 @@ export default function App() {
         />
         <Route
           path="/api/items/detail/:itemId/"
-          element={<ProductDetail />}
+          element={<ProductDetail getUserDetail={getUserDetail}/>}
         />
         {/* <Route 
           path="/product-form"
