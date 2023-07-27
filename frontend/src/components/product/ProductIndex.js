@@ -39,11 +39,10 @@ export default function ProductIndex(props) {
                         <img className="product-image" src={product.image_url} alt="You're here!"/>
                     </div>
                     <div className="info-div">
-                        <Link to={`/api/items/detail/${product.id}/`}><h2>{product.name}</h2></Link>
+                        <Link className="title-product" to={`/api/items/detail/${product.id}/`}><h2>{product.name}</h2></Link>
                         <p className="info-element">Condition: {product.condition}</p>
                         <p className="info-element">Description: {product.description}</p>
                         <p className="info-element">Starting bid: BHD {product.starting_bid}</p>
-                        <button className="info-button">View Details</button>
                     </div>
                     
                 {/* {allImages(product.image_url)} */}
