@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
-
+import RecordsImg from '../../images/Records.jpg'
 
 export default function HomePage(props) {
   console.log(props)
@@ -61,6 +61,9 @@ export default function HomePage(props) {
                 And with our convenient online bidding system, you can participate in the auction from anywhere in the world. 
                 So what are you waiting for? Start browsing our auctions today and see what you can find!</p>
             </div>
+            <img src={RecordsImg} className="homepageimg"/>
+
+            
             <div className="homepage-div2">
             {allCategories}
             </div>

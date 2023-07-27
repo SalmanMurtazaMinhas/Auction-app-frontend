@@ -76,19 +76,23 @@ export default function ProductDetail(props) {
 
   return (
     <>
-         <div>
-          <img src={item.image_url}></img>
+         <div className="product-info">
+          <div className="subdiv">
+          <img className="product-detailimg" src={item.image_url}></img>
+          </div>
+          <div className="subdiv">
         <h1>{item.name}</h1>
         <p>{item.description}</p>
         <p>${item.starting_bid}</p>
         <p> Current bid: {lastBid}</p>
-      </div>
+      
         <form onSubmit={handleBid}>
           <input onChange={handleChange} type="text" name="amount" placeholder="Enter amount" />
           <input type="submit" value="Submit" />
         </form>
-
+        </div>
         {userMessage}
+        </div>
     </>
   )
 }
