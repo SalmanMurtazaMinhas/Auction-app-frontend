@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 
-export default function ProductIndex() {
-
+export default function ProductIndex(props) {
+    console.log(props)
+    const balance = props.userDetails.money
+    console.log(balance)
     const [products, setProducts] = useState([])
 
     useEffect(() => {
         getAllProducts()
     }, [])
+
 
     const getAllProducts = async () => {
         const response = await axios.get('api/items/', 
@@ -54,9 +57,12 @@ export default function ProductIndex() {
     })
 
     return (
+        <>
+        Current Balance: {balance}
         <div className="product-masterdiv">
             {allProducts}
         </div>
+        </>
 
     )
 }
